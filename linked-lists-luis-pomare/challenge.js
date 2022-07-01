@@ -7,27 +7,34 @@ class Node {
 
 class LinkedList {
   // setup head and tail
-  constructor(head = null, tail = null) {
-    this.head = null;
-    this.tail = null;
+  constructor(head = null) {
+    this.head = head;
   }
 
   add(number) {
     // your code here
     let current = this.head;
-    const newNode = new Node(number, null);
-    if (!this.head) {
-      this.head = newNode;
-      return;
+    if (current === null) {
+      this.head = new Node(number, null);
+    } else {
+      // Search for the end of the list
+      while (current.next_node) {
+        current = current.next_node;
+      }
+      current.next_node = new Node(number, null);
     }
-    while (current.next_node !== null) {
-      current = current.next_node;
-    }
-    current.next_node = newNode;
   }
 
   get(index) {
     // your code here
+    let current = this.head;
+    let pointer = 0;
+    // Looping till the index element
+    while (pointer < index) {
+      current = current.next_node;
+      pointer += 1;
+    }
+    return current.value;
   }
 }
 
