@@ -9,6 +9,7 @@ class LinkedList {
   // setup head and tail
   constructor(head = null) {
     this.head = head;
+    this.lenght = 0;
   }
 
   add(number) {
@@ -26,19 +27,24 @@ class LinkedList {
     }
   }
 
-  get(index) {
-    // your code here
+  get_node(index) {
     let current = this.head;
     let pointer = 0;
-    // Looping till the index element
     while (pointer < index) {
       current = current.next_node;
       pointer += 1;
     }
-    return current.value;
+    return current;
+  }
+
+  get(index) {
+    // your code here
+    let value = this.get_node(index).value;
+    return value;
   }
 
   add_at(index, item) {
+    const node = this.get_node(index);
     let current = this.head;
     let newNode = new Node(item, null);
 
@@ -53,8 +59,14 @@ class LinkedList {
 
 const list = new LinkedList();
 
-list.add(3);
+list.add(3); // 3 1 5 15
 list.add(5);
+list.add(15);
+list.add_at(1);
+console.log(list.get(0));
+console.log(list.get(2));
+
+/*
 list.addAt(1, 11);
 list.addAt(0, 13);
 
@@ -63,5 +75,5 @@ console.log(list.get(2));
 
 console.log(list.get(3));
 // => 5
-
+*/
 module.exports = LinkedList;
